@@ -1,1 +1,1378 @@
 
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🌿 مزرعه کامل ۲۰۲۶ - نسخه نهایی</title>
+    <style>
+        /* ============================================================
+           تم سبز روشن و سفید - نسخه کامل و بی‌نقص
+           ============================================================ */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        :root {
+            --bg-primary: #f0f7f0;
+            --bg-secondary: #e8f5e9;
+            --bg-card: #ffffff;
+            --text-primary: #1a2a1a;
+            --text-secondary: #2d4a2d;
+            --text-muted: #4a6a4a;
+            --green-light: #81c784;
+            --green-medium: #4caf50;
+            --green-dark: #2e7d32;
+            --green-shadow: rgba(76, 175, 80, 0.2);
+            --gold: #f9a825;
+            --gold-light: #ffd54f;
+            --gold-shadow: rgba(249, 168, 37, 0.3);
+            --success: #43a047;
+            --danger: #e53935;
+            --info: #1e88e5;
+            --warning: #fb8c00;
+            --purple: #7b1fa2;
+            --pink: #d81b60;
+            --border-radius: 16px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow: 0 4px 20px rgba(0,0,0,0.06);
+            --shadow-hover: 0 8px 40px rgba(76, 175, 80, 0.12);
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Tahoma', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--green-light);
+            border-radius: 8px;
+        }
+
+        /* ===== پارتیکل‌های پس‌زمینه ===== */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: floatUp linear infinite;
+        }
+        .particle.green {
+            background: rgba(76, 175, 80, 0.15);
+        }
+        .particle.gold {
+            background: rgba(249, 168, 37, 0.12);
+        }
+        .particle.white {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* ===== صفحه ورود ===== */
+        #splashScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #e8f5e9, #c8e6c9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease;
+        }
+        #splashScreen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .splash-container {
+            text-align: center;
+            animation: fadeInUp 1.5s ease;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        .splash-logo {
+            font-size: 7rem;
+            margin-bottom: 15px;
+            animation: logoFloat 3s ease-in-out infinite;
+            filter: drop-shadow(0 10px 40px rgba(76, 175, 80, 0.2));
+        }
+        @keyframes logoFloat {
+            0%,
+            100% {
+                transform: translateY(0) scale(1) rotate(0deg);
+            }
+            33% {
+                transform: translateY(-30px) scale(1.05) rotate(-3deg);
+            }
+            66% {
+                transform: translateY(-15px) scale(1.02) rotate(3deg);
+            }
+        }
+        .splash-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: var(--green-dark);
+        }
+        .splash-sub {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-top: 8px;
+        }
+        .splash-version {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: 4px;
+        }
+        .loading-container {
+            width: 320px;
+            margin-top: 25px;
+        }
+        .loading-bar {
+            width: 100%;
+            height: 8px;
+            background: #c8e6c9;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .loading-bar-inner {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--green-light), var(--green-medium), var(--green-dark));
+            border-radius: 4px;
+            animation: loadingProgress 3.5s ease-in-out forwards;
+        }
+        @keyframes loadingProgress {
+            0% {
+                width: 0%;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+        .loading-text {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        .loading-tips {
+            margin-top: 15px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            max-width: 300px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        /* ===== بازی ===== */
+        #gameContainer {
+            max-width: 540px;
+            margin: 0 auto;
+            background: var(--bg-primary);
+            min-height: 100vh;
+            padding: 10px;
+            display: none;
+            position: relative;
+            z-index: 1;
+        }
+        #gameContainer.active {
+            display: block;
+        }
+
+        /* ===== هدر ===== */
+        header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-card);
+            padding: 12px 18px;
+            border-radius: var(--border-radius);
+            margin-bottom: 10px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(76, 175, 80, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--green-light), var(--green-medium), var(--green-dark));
+        }
+        header * {
+            position: relative;
+            z-index: 1;
+        }
+        .resources {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .resource-item {
+            background: var(--bg-secondary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.65rem;
+            white-space: nowrap;
+            color: var(--text-secondary);
+            transition: var(--transition);
+            border: 1px solid rgba(76, 175, 80, 0.06);
+        }
+        .resource-item:hover {
+            transform: scale(1.05);
+            border-color: var(--green-light);
+        }
+        .resource-item span {
+            color: var(--green-dark);
+        }
+        .resource-item .gem {
+            color: var(--gold);
+        }
+        .level-badge {
+            background: linear-gradient(145deg, var(--green-light), var(--green-medium));
+            color: #fff;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.7rem;
+            box-shadow: 0 4px 15px var(--green-shadow);
+        }
+
+        /* ===== اطلاعات سریع ===== */
+        .quick-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            justify-content: center;
+            margin: 8px 0;
+            font-size: 0.6rem;
+        }
+        .quick-info .badge {
+            background: var(--bg-card);
+            padding: 4px 12px;
+            border-radius: 16px;
+            border: 1px solid rgba(76, 175, 80, 0.08);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: var(--transition);
+            color: var(--text-secondary);
+        }
+        .quick-info .badge:hover {
+            border-color: var(--green-light);
+            transform: translateY(-1px);
+        }
+
+        /* ===== ماموریت ===== */
+        .mission-box {
+            background: var(--bg-card);
+            padding: 12px 16px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin: 8px 0;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(76, 175, 80, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        .mission-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold-light), var(--gold));
+        }
+        .mission-box * {
+            position: relative;
+            z-index: 1;
+        }
+        .mission-text {
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+        .mission-progress {
+            width: 100%;
+            height: 6px;
+            background: var(--bg-secondary);
+            border-radius: 3px;
+            margin: 8px 0;
+            overflow: hidden;
+        }
+        .mission-progress-inner {
+            height: 100%;
+            background: linear-gradient(90deg, var(--green-light), var(--green-medium));
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+        .mission-reward {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+        }
+        .mission-reward span {
+            color: var(--green-dark);
+            font-weight: bold;
+        }
+
+        /* ===== ناوبری ===== */
+        .tabs {
+            display: flex;
+            gap: 4px;
+            margin: 10px 0;
+            overflow-x: auto;
+            padding: 2px;
+        }
+        .tabs button {
+            flex: 1;
+            min-width: 40px;
+            padding: 10px 3px;
+            border: none;
+            border-radius: 14px;
+            background: var(--bg-card);
+            color: var(--text-muted);
+            font-weight: bold;
+            font-size: 0.55rem;
+            cursor: pointer;
+            transition: var(--transition);
+            touch-action: manipulation;
+            white-space: nowrap;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(76, 175, 80, 0.05);
+        }
+        .tabs button.active {
+            background: var(--green-light);
+            color: #fff;
+            box-shadow: 0 4px 20px var(--green-shadow);
+        }
+        .tabs button:hover {
+            transform: translateY(-1px);
+        }
+        .tabs button:active {
+            transform: scale(0.95);
+        }
+        .tabs button.legendary {
+            background: linear-gradient(145deg, var(--gold-light), var(--gold));
+            color: #fff;
+        }
+        .tabs button.legendary.active {
+            box-shadow: 0 4px 20px var(--gold-shadow);
+        }
+
+        /* ===== صفحات ===== */
+        .page {
+            display: none;
+            background: var(--bg-card);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin-top: 8px;
+            min-height: 400px;
+            animation: pageSlide 0.4s ease;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(76, 175, 80, 0.05);
+        }
+        @keyframes pageSlide {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .page.active {
+            display: block;
+        }
+
+        /* ===== مزرعه ===== */
+        #farmGrid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 7px;
+        }
+        .plot {
+            aspect-ratio: 1/1;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 2px solid #c8e6c9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+            min-height: 50px;
+        }
+        .plot:hover {
+            border-color: var(--green-light);
+            transform: scale(1.02);
+        }
+        .plot:active {
+            transform: scale(0.92);
+        }
+        .plot .plot-info {
+            position: absolute;
+            bottom: 2px;
+            font-size: 0.35rem;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1px 6px;
+            border-radius: 8px;
+            color: var(--text-secondary);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+        }
+        .plot .plot-top {
+            position: absolute;
+            top: 2px;
+            display: flex;
+            gap: 3px;
+            font-size: 0.35rem;
+        }
+        .plot .plot-top .badge {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1px 5px;
+            border-radius: 6px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+        }
+        .plot .plot-hint {
+            position: absolute;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.4rem;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 8px;
+            opacity: 0;
+            transition: var(--transition);
+            white-space: nowrap;
+            pointer-events: none;
+        }
+        .plot:hover .plot-hint {
+            opacity: 1;
+        }
+        .plot .growth-bar {
+            position: absolute;
+            bottom: 18px;
+            left: 10%;
+            width: 80%;
+            height: 4px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .plot .growth-bar-inner {
+            height: 100%;
+            background: linear-gradient(90deg, var(--green-light), var(--gold));
+            border-radius: 2px;
+            transition: width 0.5s ease;
+            width: 0%;
+        }
+        .plot.growing {
+            background: #c8e6c9;
+            border-color: var(--green-light);
+            animation: growPulse 2s ease-in-out infinite;
+        }
+        @keyframes growPulse {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.03);
+            }
+        }
+        .plot.ready {
+            background: var(--gold-light);
+            border-color: var(--gold);
+            animation: readyPulse 0.8s ease-in-out infinite;
+        }
+        @keyframes readyPulse {
+            0%,
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 20px var(--gold-shadow);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 40px var(--gold-shadow);
+            }
+        }
+        .plot.dry {
+            border-color: #ffccbc;
+            background: #fff3e0;
+        }
+        .plot.watered {
+            border-color: #81d4fa;
+        }
+
+        /* ===== دکمه‌های کنترل ===== */
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            margin: 10px 0;
+        }
+        .controls button {
+            background: var(--bg-secondary);
+            border: none;
+            padding: 10px 4px;
+            border-radius: 12px;
+            color: var(--text-secondary);
+            font-weight: bold;
+            font-size: 0.65rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid #c8e6c9;
+        }
+        .controls button:active {
+            transform: scale(0.95);
+        }
+        .controls button:hover {
+            background: var(--green-light);
+            color: #fff;
+            border-color: var(--green-light);
+        }
+        .controls button.special {
+            background: var(--warning);
+            color: #fff;
+            border-color: var(--warning);
+        }
+        .controls button.special:hover {
+            background: #f57c00;
+        }
+        .controls button.success {
+            background: var(--success);
+            color: #fff;
+            border-color: var(--success);
+        }
+        .controls button.success:hover {
+            background: #388e3c;
+        }
+        .controls button.danger {
+            background: var(--danger);
+            color: #fff;
+            border-color: var(--danger);
+        }
+        .controls button.danger:hover {
+            background: #c62828;
+        }
+        .controls button.purple {
+            background: var(--purple);
+            color: #fff;
+            border-color: var(--purple);
+        }
+        .controls button.purple:hover {
+            background: #6a1b9a;
+        }
+        .controls button.gold {
+            background: linear-gradient(145deg, var(--gold-light), var(--gold));
+            color: #fff;
+            border-color: var(--gold);
+        }
+
+        /* ===== محصولات ===== */
+        .products-filter {
+            display: flex;
+            gap: 5px;
+            margin: 10px 0;
+            overflow-x: auto;
+            padding: 4px;
+        }
+        .products-filter button {
+            padding: 6px 14px;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 0.6rem;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            white-space: nowrap;
+        }
+        .products-filter button.active {
+            background: var(--green-light);
+            color: #fff;
+        }
+        .products-filter button:active {
+            transform: scale(0.95);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .product-item {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #c8e6c9;
+            transition: var(--transition);
+        }
+        .product-item:hover {
+            border-color: var(--green-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+        .product-item .icon {
+            font-size: 2rem;
+            display: block;
+        }
+        .product-item .name {
+            font-weight: bold;
+            font-size: 0.75rem;
+        }
+        .product-item .count {
+            font-size: 1.2rem;
+            color: var(--green-dark);
+            font-weight: bold;
+        }
+        .product-item .price {
+            font-size: 0.6rem;
+            color: var(--text-muted);
+        }
+        .product-item .category {
+            font-size: 0.5rem;
+            background: var(--bg-card);
+            padding: 1px 10px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 4px;
+            color: var(--text-muted);
+        }
+        .product-item .sell-btn {
+            background: var(--success);
+            border: none;
+            padding: 4px 14px;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 0.55rem;
+            cursor: pointer;
+            margin-top: 6px;
+            transition: var(--transition);
+        }
+        .product-item .sell-btn:hover {
+            background: var(--green-dark);
+        }
+        .product-item .sell-btn:active {
+            transform: scale(0.95);
+        }
+
+        .products-stats {
+            margin-top: 15px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #c8e6c9;
+        }
+        .products-stats .stat {
+            font-size: 0.8rem;
+        }
+        .products-stats .stat span {
+            color: var(--green-dark);
+            font-weight: bold;
+        }
+
+        /* ===== رستوران ===== */
+        .restaurant-header {
+            text-align: center;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: linear-gradient(145deg, var(--bg-secondary), var(--bg-card));
+            border-radius: 12px;
+            border: 1px solid #c8e6c9;
+        }
+        .restaurant-header .level {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+        .restaurant-header .level span {
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .menu-item {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #c8e6c9;
+            transition: var(--transition);
+        }
+        .menu-item:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+        .menu-item .icon {
+            font-size: 2.5rem;
+            display: block;
+        }
+        .menu-item .name {
+            font-weight: bold;
+            font-size: 0.75rem;
+        }
+        .menu-item .ingredients {
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            margin: 4px 0;
+        }
+        .menu-item .price {
+            font-size: 0.65rem;
+            color: var(--gold);
+            font-weight: bold;
+        }
+        .menu-item .profit {
+            font-size: 0.5rem;
+            color: var(--success);
+        }
+        .menu-item .cook-btn {
+            background: var(--warning);
+            border: none;
+            padding: 4px 14px;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 0.55rem;
+            cursor: pointer;
+            margin-top: 6px;
+            transition: var(--transition);
+        }
+        .menu-item .cook-btn:hover {
+            background: #f57c00;
+        }
+        .menu-item .cook-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* ===== دامداری ===== */
+        .animal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .animal-card {
+            background: var(--bg-secondary);
+            border-radius: 14px;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #c8e6c9;
+            transition: var(--transition);
+        }
+        .animal-card:hover {
+            border-color: var(--green-light);
+            transform: translateY(-2px);
+        }
+        .animal-card .emoji {
+            font-size: 2.8rem;
+        }
+        .animal-card .count {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: var(--green-dark);
+        }
+        .animal-card .health-bar {
+            width: 100%;
+            height: 5px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            margin: 5px 0;
+            overflow: hidden;
+        }
+        .animal-card .health-bar-inner {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+        .animal-card .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            justify-content: center;
+            margin-top: 6px;
+        }
+        .animal-card button {
+            border: none;
+            padding: 4px 12px;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 0.6rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .animal-card button:active {
+            transform: scale(0.92);
+        }
+        .animal-card button.buy {
+            background: var(--success);
+        }
+        .animal-card button.buy:hover {
+            background: #388e3c;
+        }
+        .animal-card button.sell {
+            background: var(--danger);
+        }
+        .animal-card button.sell:hover {
+            background: #c62828;
+        }
+        .animal-card button.breed {
+            background: var(--purple);
+        }
+        .animal-card button.breed:hover {
+            background: #6a1b9a;
+        }
+
+        .animal-controls {
+            grid-column: 1/3;
+            background: var(--bg-secondary);
+            border-radius: 14px;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #c8e6c9;
+        }
+        .animal-controls .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            justify-content: center;
+        }
+        .animal-controls button {
+            border: none;
+            padding: 5px 16px;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 0.6rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .animal-controls button:active {
+            transform: scale(0.92);
+        }
+        .animal-controls button.feed {
+            background: var(--warning);
+        }
+        .animal-controls button.feed:hover {
+            background: #f57c00;
+        }
+        .animal-controls button.heal {
+            background: var(--info);
+        }
+        .animal-controls button.heal:hover {
+            background: #1565c0;
+        }
+
+        /* ===== شهرسازی ===== */
+        .city-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+        }
+        .building-card {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #c8e6c9;
+            transition: var(--transition);
+        }
+        .building-card:hover {
+            border-color: var(--green-light);
+            transform: translateY(-2px);
+        }
+        .building-card .emoji {
+            font-size: 2rem;
+        }
+        .building-card .name {
+            font-weight: bold;
+            font-size: 0.65rem;
+        }
+        .building-card .level {
+            font-size: 0.5rem;
+            color: var(--text-muted);
+        }
+        .building-card .level span {
+            color: var(--gold);
+            font-weight: bold;
+        }
+        .building-card button {
+            background: var(--warning);
+            border: none;
+            padding: 3px 12px;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 0.5rem;
+            cursor: pointer;
+            margin-top: 4px;
+            transition: var(--transition);
+        }
+        .building-card button:active {
+            transform: scale(0.95);
+        }
+        .building-card button:hover {
+            background: #f57c00;
+        }
+
+        /* ===== جامعه ===== */
+        .society-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .worker-card {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #c8e6c9;
+            transition: var(--transition);
+        }
+        .worker-card:hover {
+            border-color: var(--green-light);
+        }
+        .worker-card .name {
+            font-weight: bold;
+            color: var(--green-dark);
+        }
+        .worker-card .skill {
+            font-size: 0.6rem;
+            color: var(--text-muted);
+        }
+        .worker-card .happiness {
+            font-size: 0.6rem;
+        }
+        .worker-card .family {
+            font-size: 0.5rem;
+            color: var(--text-muted);
+        }
+        .worker-card .happiness-bar {
+            width: 100%;
+            height: 4px;
+            background: #e0e0e0;
+            border-radius: 2px;
+            margin: 4px 0;
+            overflow: hidden;
+        }
+        .worker-card .happiness-bar-inner {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.5s ease;
+        }
+
+        /* ===== مینی‌گیم‌ها ===== */
+        .minigame-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .minigame-card {
+            background: var(--bg-secondary);
+            border-radius: 14px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #c8e6c9;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .minigame-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+        .minigame-card:active {
+            transform: scale(0.95);
+        }
+        .minigame-card .emoji {
+            font-size: 3rem;
+        }
+        .minigame-card .name {
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        .minigame-card .desc {
+            font-size: 0.6rem;
+            color: var(--text-muted);
+        }
+        .minigame-card .reward {
+            font-size: 0.6rem;
+            color: var(--gold);
+        }
+
+        /* ===== کارخانه ===== */
+        .factory-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .factory-item {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #c8e6c9;
+            transition: var(--transition);
+        }
+        .factory-item:hover {
+            border-color: var(--green-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+        .factory-item .emoji {
+            font-size: 2.2rem;
+        }
+        .factory-item .name {
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        .factory-item .price {
+            color: var(--green-dark);
+            font-size: 0.7rem;
+        }
+        .factory-item button {
+            background: var(--green-medium);
+            border: none;
+            padding: 4px 14px;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 0.6rem;
+            cursor: pointer;
+            margin-top: 4px;
+            transition: var(--transition);
+        }
+        .factory-item button:hover {
+            background: var(--green-dark);
+        }
+        .factory-item button:active {
+            transform: scale(0.95);
+        }
+
+        .factory-controls {
+            grid-column: 1/3;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #c8e6c9;
+        }
+        .factory-controls button {
+            border: none;
+            padding: 4px 16px;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 0.6rem;
+            cursor: pointer;
+            margin: 3px;
+            transition: var(--transition);
+        }
+        .factory-controls button:active {
+            transform: scale(0.95);
+        }
+        .factory-controls button.upgrade {
+            background: var(--warning);
+        }
+        .factory-controls button.upgrade:hover {
+            background: #f57c00;
+        }
+        .factory-controls button.beehive {
+            background: var(--gold);
+        }
+        .factory-controls button.beehive:hover {
+            background: #f9a825;
+        }
+
+        /* ===== قلمرو افسانه ===== */
+        .legendary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .legendary-card {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #c8e6c9;
+            transition: var(--transition);
+        }
+        .legendary-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px);
+        }
+        .legendary-card .emoji {
+            font-size: 2.5rem;
+        }
+        .legendary-card .name {
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        .legendary-card .level {
+            font-size: 0.6rem;
+            color: var(--text-muted);
+        }
+        .legendary-card button {
+            border: none;
+            padding: 4px 14px;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 0.6rem;
+            cursor: pointer;
+            margin-top: 4px;
+            transition: var(--transition);
+        }
+        .legendary-card button:active {
+            transform: scale(0.95);
+        }
+        .legendary-card button.buy {
+            background: var(--success);
+        }
+        .legendary-card button.buy:hover {
+            background: #388e3c;
+        }
+        .legendary-card button.attack {
+            background: var(--danger);
+        }
+        .legendary-card button.attack:hover {
+            background: #c62828;
+        }
+
+        /* ===== مودال‌ها ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+        .modal-content {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 20px;
+            max-width: 450px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            animation: modalSlide 0.4s ease;
+        }
+        @keyframes modalSlide {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        .modal-content .close-modal {
+            float: left;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #999;
+            transition: var(--transition);
+        }
+        .modal-content .close-modal:hover {
+            color: var(--text-primary);
+            transform: rotate(90deg);
+        }
+        .modal-content h2 {
+            text-align: center;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .shop-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .shop-item {
+            background: var(--bg-secondary);
+            padding: 12px;
+            border-radius: 14px;
+            cursor: pointer;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid #c8e6c9;
+        }
+        .shop-item:hover {
+            border-color: var(--green-light);
+            transform: translateY(-3px);
+        }
+        .shop-item .icon {
+            font-size: 2rem;
+            display: block;
+        }
+        .shop-item .price {
+            color: var(--green-dark);
+            font-weight: bold;
+            font-size: 0.7rem;
+        }
+
+        /* ===== مودال بذر ===== */
+        #seedModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+        #seedModal.show {
+            display: flex;
+        }
+        .seed-modal-content {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 24px;
+            max-width: 400px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            animation: modalSlide 0.4s ease;
+            border: 1px solid rgba(76, 175, 80, 0.08);
+        }
+        .seed-modal-content .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .seed-modal-content .modal-header h2 {
+            color: var(--green-dark);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+        .seed-modal-content .close-seed-modal {
+            font-size: 2rem;
+            cursor: pointer;
+            color: #999;
+            transition: var(--transition);
+            line-height: 1;
+        }
+        .seed-modal-content .close-seed-modal:hover {
+            color: var(--text-primary);
+            transform: rotate(90deg);
+        }
+
+        .seed-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .seed-option {
+            background: var(--bg-secondary);
+            border-radius: 14px;
+            padding: 14px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+        .seed-option:hover {
+            border-color: var(--green-light);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+        .seed-option:active {
+            transform: scale(0.95);
+        }
+        .seed-option .icon {
+            font-size: 2.5rem;
+            display: block;
+        }
+        .seed-option .name {
+            font-weight: bold;
+            font-size: 0.75rem;
+            color: var(--text-primary);
+            margin-top: 4px;
+        }
+        .seed-option .count {
+       
